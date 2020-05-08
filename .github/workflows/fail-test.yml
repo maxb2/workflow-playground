@@ -21,7 +21,7 @@ jobs:
 
       - name: Step to fail
         continue-on-error: true
-        run: return 2 && echo "::set-env name=BUILD_FAIL::false"
+        run: echo success && echo "::set-env name=BUILD_FAIL::false"
 
       - name: Did it fail?
         if: ${{ env.BUILD_FAIL }}
