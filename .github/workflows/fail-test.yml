@@ -24,7 +24,7 @@ jobs:
         run: echo success && echo "::set-env name=BUILD_FAIL::false"
 
       - name: Did it fail?
-        if: env.BUILD_FAIL == true
+        if: env.BUILD_FAIL 
         run: |
           echo It failed
           echo ${{ env.BUILD_FAIL }}
