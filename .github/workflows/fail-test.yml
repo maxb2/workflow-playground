@@ -1,0 +1,35 @@
+name: Build Docker
+
+on:
+  push:
+    branches: [ master ]
+    tags:
+      - 'v*'
+
+jobs:
+
+  build:
+    name: Fail test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Step to fail
+        run: return 2
+
+      - name: Did it fail?
+        if: ${{ failure() }}
+        run: echo It failed
+
+
+  test:
+    name: Continue
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Continue
+        run: echo We carried on
