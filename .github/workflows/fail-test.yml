@@ -15,12 +15,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Set environment
+        run: |
+          echo "::set-env name=BUILD_FAIL::true"
+
       - name: Step to fail
         continue-on-error: true
-        run: return 2
+        run: return 2 && echo "::set-env name=BUILD_FAIL::false"
 
       - name: Did it fail?
-        if: ${{ failure() }}
+        if: ${{ BUILD_FAIL }}
         run: echo It failed
 
 
