@@ -16,6 +16,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Step to fail
+        continue-on-error: true
         run: return 2
 
       - name: Did it fail?
