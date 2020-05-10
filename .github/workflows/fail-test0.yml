@@ -11,19 +11,12 @@ jobs:
   build:
     name: Fail test
     runs-on: windows-latest
-    defaults:
-      run:
-        shell: bash
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Set environment
-        run: |
-          echo "::set-env name=BUILD_FAIL::true"
-
       - name: Step to fail
-        continue-on-error: true
         run: zip --version
 
       - name: Did it fail?
