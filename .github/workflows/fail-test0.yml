@@ -1,0 +1,45 @@
+name: Build Docker
+
+on:
+  push:
+    branches: [ master ]
+    tags:
+      - 'v*'
+
+jobs:
+
+  build:
+    name: Fail test
+    runs-on: windows-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set environment
+        run: |
+          echo "::set-env name=BUILD_FAIL::true"
+
+      - name: Step to fail
+        continue-on-error: true
+        run: echo success && echo "::set-env name=BUILD_FAIL::false"
+
+      - name: Did it fail?
+        if: env.BUILD_FAIL == 'true'
+        run: |
+          echo It failed
+          echo ${{ env.BUILD_FAIL }}
+          echo $(${{ env.BUILD_FAIL }} == true)
+
+  test:
+    name: Continue
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Continue
+        run: echo We carried on
