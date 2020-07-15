@@ -1,0 +1,25 @@
+name: Build Docker
+
+on:
+  push:
+    paths:
+    - "**"
+    # Don't build when it is just a doc update
+    - '!docs/**'
+    - '!wiki/**'
+    - '!*.md"
+    branches: [ master ]
+    tags:
+      - 'v*'
+
+jobs:
+
+  job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: run
+        run: |
+          echo "I ran!"
