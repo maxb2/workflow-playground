@@ -2,15 +2,15 @@ name: Build Docker
 
 on:
   push:
+    branches: [ master ]
+    tags:
+      - 'v*'
     paths:
     - "**"
     # Don't build when it is just a doc update
     - '!docs/**'
     - '!wiki/**'
     - '!*.md"
-    branches: [ master ]
-    tags:
-      - 'v*'
 
 jobs:
 
