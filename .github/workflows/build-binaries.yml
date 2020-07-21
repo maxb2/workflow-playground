@@ -27,6 +27,6 @@ jobs:
           echo "Not on Master!"
 
       - name: Upload Linux Release
-        if: ${{ github.ref = 'refs/heads/master' }}
+        if: ${{ github.ref == 'refs/heads/master' }}
         run: |
           echo "On Master!"
