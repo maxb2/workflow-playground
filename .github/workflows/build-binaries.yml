@@ -22,7 +22,7 @@ jobs:
           echo $GITHUB_REF
 
       - name: Upload Linux Release
-        if: ${{ github.ref != 'refs/heads/master' }}
+        if: startsWith( github.ref, 'refs/tags/' )
         run: |
           echo "Not on Master!"
 
