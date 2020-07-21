@@ -15,6 +15,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Setup node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 10
+
       - name: Set environment
         run: |
           node ./scripts/set-git-tag-env.js
