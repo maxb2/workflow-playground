@@ -21,4 +21,12 @@ jobs:
           echo $GH_TAG
           echo $GITHUB_REF
 
+      - name: Upload Linux Release
+        if: ${{ github.ref != 'refs/heads/master' }}
+        steps: |
+          echo "Not on Master!"
 
+      - name: Upload Linux Release
+        if: ${{ github.ref = 'refs/heads/master' }}
+        steps: |
+          echo "On Master!"
