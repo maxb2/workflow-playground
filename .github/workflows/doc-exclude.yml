@@ -20,6 +20,7 @@ jobs:
 
 
       - name: Create Release
+        if: startsWith( github.ref, 'refs/tags/' ) # Run on tags only.
         id: create_release
         uses: actions/create-release@v1
         env:
@@ -29,3 +30,20 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: true
           prerelease: false
+
+      - name: Create Release
+        if: startsWith( github.ref, 'refs/heads/' ) # Run on master only.
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: master-$(git rev-parse --short HEAD)
+          release_name: Release master-$(git rev-parse --short HEAD)
+          draft: true
+          prerelease: true
+
+
+      - name: run
+        run: |
+          echo $${{ steps.create_release.outputs.upload_url }}
