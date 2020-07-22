@@ -11,7 +11,7 @@ jobs:
 
       - name: run
         run: |
-          echo "I ran!"
+          echo "I ran! ${{ EVENT_PAYLOAD.repository.name }}"
 
       - name: Discord notification
         env:
