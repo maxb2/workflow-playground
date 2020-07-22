@@ -18,4 +18,4 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@master
         with:
-          args: $(printf "The project {{ EVENT_PAYLOAD.repository.name }}@{{ EVENT_PAYLOAD.release.tag_name }} has been deployed. Check out the %s at {{ EVENT_PAYLOAD.release.html_url }}" $(if {{ EVENT_PAYLOAD.release.prerelease }}; then echo "prerelease"; else echo "release"; fi))
+          args: printf "The project {{ EVENT_PAYLOAD.repository.name }}@{{ EVENT_PAYLOAD.release.tag_name }} has been deployed. Check out the %s at {{ EVENT_PAYLOAD.release.html_url }}" $(if {{ EVENT_PAYLOAD.release.prerelease }}; then echo "prerelease"; else echo "release"; fi)
