@@ -18,13 +18,13 @@ jobs:
         run: |
           echo "I ran! ${{ github.event }}"
 
-      - name: Set environment: master
+      - name: "Set environment: master"
         if: startsWith( github.ref, 'refs/heads/' ) # Run on master only.
         run: |
           echo "::set-env name=PRERELEASE::true"
           echo "::set-env name=TAG_NAME::master-$(git rev-parse --short HEAD)"
 
-      - name: Set environment: tag
+      - name: "Set environment: tag"
         if: startsWith( github.ref, 'refs/tags/' ) # Run on master only.
         run: |
           echo "::set-env name=PRERELEASE::false"
