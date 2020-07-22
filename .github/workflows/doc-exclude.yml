@@ -16,8 +16,8 @@ jobs:
 
       - name: run
         run: |
-          echo "I ran! ${{ github.event_path }}"
-          cat ${{ github.event_path }}
+          echo "I ran! ${{ github.event }}"
+
 
       - name: Create Release
         id: create_release

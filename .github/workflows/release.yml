@@ -9,14 +9,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: run
-        run: |
-          echo "I ran! ${{ github.event_path }}"
-          cat ${{ github.event_path }}
-
       - name: Discord notification
+        if: {{ github.event.release.prerelease }}
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@master
         with:
-          args: printf "The project {{ EVENT_PAYLOAD.repository.name }}@{{ EVENT_PAYLOAD.release.tag_name }} has been deployed. Check out the %s at {{ EVENT_PAYLOAD.release.html_url }}" $(if {{ EVENT_PAYLOAD.release.prerelease }}; then echo "prerelease"; else echo "release"; fi)
+          args: "The project ${{ github.event.repository.name }}@${{ github.event.release.tag_name }} has been deployed. Check out the prerelease at ${{ github.event.release.html_url }}. Help us test before the release is finalized."
+
+      - name: Discord notification
+        if: {{ ! github.event.release.prerelease }}
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: "The project ${{ github.event.repository.name }}@${{ github.event.release.tag_name }} has been deployed. Check out the release at ${{ github.event.release.html_url }}"
