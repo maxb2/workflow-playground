@@ -16,7 +16,8 @@ jobs:
 
       - name: run
         run: |
-          echo "I ran!"
+          echo "I ran! ${{ env.GITHUB_EVENT_PATH }}"
+          cat ${{ env.GITHUB_EVENT_PATH }}
 
       - name: Create Release
         id: create_release

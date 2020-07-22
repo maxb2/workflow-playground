@@ -11,8 +11,8 @@ jobs:
 
       - name: run
         run: |
-          echo "I ran! ${{ GITHUB_EVENT_PATH }}"
-          cat ${{ GITHUB_EVENT_PATH }}
+          echo "I ran! ${{ env.GITHUB_EVENT_PATH }}"
+          cat ${{ env.GITHUB_EVENT_PATH }}
 
       - name: Discord notification
         env:
