@@ -1,6 +1,6 @@
 on:
   release:
-    types: [published, prereleased]
+    types: [published]
 
 jobs:
   job:
