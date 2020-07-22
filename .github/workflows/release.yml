@@ -14,18 +14,8 @@ jobs:
           echo "I ran!"
 
       - name: Discord notification
-        if: ${{ EVENT_PAYLOAD.release.prerelease }}
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@master
         with:
-          args: 'The project {{ EVENT_PAYLOAD.repository.name }}@{{ EVENT_PAYLOAD.release.tag_name }} has been deployed. Check out the prerelease at {{ EVENT_PAYLOAD.release.html_url }}'
-
-
-      - name: Discord notification
-        if: ${{ !EVENT_PAYLOAD.release.prerelease }}
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        uses: Ilshidur/action-discord@master
-        with:
-          args: 'The project {{ EVENT_PAYLOAD.repository.name }}@{{ EVENT_PAYLOAD.release.tag_name }} has been deployed. Check out the release at {{ EVENT_PAYLOAD.release.html_url }}'
+          args: $(printf "The project {{ EVENT_PAYLOAD.repository.name }}@{{ EVENT_PAYLOAD.release.tag_name }} has been deployed. Check out the %s at {{ EVENT_PAYLOAD.release.html_url }}" $(if {{ EVENT_PAYLOAD.release.prerelease }}; then echo "prerelease"; else echo "release"; fi))

@@ -28,10 +28,3 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: true
           prerelease: false
-
-      - name: Discord notification
-        env:
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-        uses: Ilshidur/action-discord@master
-        with:
-          args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed. Check out the build artifacts at https://github.com/maxb2/workflow-playground/actions/runs/${{ github.run_id }}'
