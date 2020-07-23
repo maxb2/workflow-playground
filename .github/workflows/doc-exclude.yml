@@ -17,6 +17,7 @@ jobs:
       - name: run
         run: |
           echo "I ran! ${{ github.event }}"
+          cat ${{ github.event_path }}
 
       - name: "Set environment: master"
         if: startsWith( github.ref, 'refs/heads/' ) # Run on master only.
