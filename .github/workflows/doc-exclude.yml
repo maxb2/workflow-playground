@@ -24,7 +24,7 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@master
         with:
-          args: Commit $(git rev-parse --short HEAD) on master. ${{ github.event.head_commit.message }}\n ${{ github.event.head_commit.url }}
+          args: "Commit $(git rev-parse --short HEAD) on master. ${{ github.event.head_commit.message }}\n ${{ github.event.head_commit.url }}"
 
 
       - name: "Set environment: master"
