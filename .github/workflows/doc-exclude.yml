@@ -19,6 +19,14 @@ jobs:
           echo "I ran! ${{ github.event }}"
           cat ${{ github.event_path }}
 
+      - name: Discord notification
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+        uses: Ilshidur/action-discord@master
+        with:
+          args: Commit $(git rev-parse --short HEAD) on master. ${{ github.event.head_commit.message }}\n ${{ github.event.head_commit.url }}
+
+
       - name: "Set environment: master"
         if: startsWith( github.ref, 'refs/heads/' ) # Run on master only.
         run: |
